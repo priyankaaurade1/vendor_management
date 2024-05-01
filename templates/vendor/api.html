@@ -1,0 +1,14 @@
+<!-- api.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Response</title>
+</head>
+<body>
+    {% for vendor in data %}
+            <li>{{ vendor.name }} - {{ vendor.vendor_code }}</li>
+            
+    {% endfor %}
+</body>
+</html>

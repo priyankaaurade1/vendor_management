@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit Vendor</h1>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form id="updateVendorForm" method="POST" action="/api/vendors/{{ vendor_id }}/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="_method" value="PUT">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="{{ vendor.name }}"><br>
+        
+        <label for="contact_details">Contact Details:</label><br>
+        <textarea id="contact_details" name="contact_details">{{ vendor.contact_details }}</textarea><br>
+        
+        <label for="address">Address:</label><br>
+        <textarea id="address" name="address">{{ vendor.address }}</textarea><br>
+        
+        <label for="vendor_code">Vendor Code:</label><br>
+        <input type="text" id="vendor_code" name="vendor_code" value="{{ vendor.vendor_code }}"><br>
+        
+        <label for="on_time_delivery_rate">On-Time Delivery Rate:</label><br>
+        <input type="number" id="on_time_delivery_rate" name="on_time_delivery_rate" step="0.01" value="{{ vendor.on_time_delivery_rate }}"><br>
+        
+        <label for="quality_rating_avg">Quality Rating Average:</label><br>
+        <input type="number" id="quality_rating_avg" name="quality_rating_avg" step="0.01" value="{{ vendor.quality_rating_avg }}"><br>
+        
+        <label for="average_response_time">Average Response Time:</label><br>
+        <input type="number" id="average_response_time" name="average_response_time" step="0.01" value="{{ vendor.average_response_time }}"><br>
+        
+        <label for="fulfillment_rate">Fulfillment Rate:</label><br>
+        <input type="number" id="fulfillment_rate" name="fulfillment_rate" step="0.01" value="{{ vendor.fulfillment_rate }}"><br>
+        
+        <button type="submit">Update Vendor</button>
+    </form>
+    
+</body>
+</html>

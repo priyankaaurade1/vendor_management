@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vendor</title>
+</head>
+<body>
+    <h1>Add Vendor</h1>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post" action="{% url 'save_vendor' %}">
+        {% csrf_token %}
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        
+        <label for="contact_details">Contact Details:</label><br>
+        <textarea id="contact_details" name="contact_details"></textarea><br>
+        
+        <label for="address">Address:</label><br>
+        <textarea id="address" name="address"></textarea><br>
+        
+        <label for="vendor_code">Vendor Code:</label><br>
+        <input type="text" id="vendor_code" name="vendor_code"><br>
+        
+        <label for="on_time_delivery_rate">On-Time Delivery Rate:</label><br>
+        <input type="number" id="on_time_delivery_rate" name="on_time_delivery_rate" step="0.01"><br>
+        
+        <label for="quality_rating_avg">Quality Rating Average:</label><br>
+        <input type="number" id="quality_rating_avg" name="quality_rating_avg" step="0.01"><br>
+        
+        <label for="average_response_time">Average Response Time:</label><br>
+        <input type="number" id="average_response_time" name="average_response_time" step="0.01"><br>
+        
+        <label for="fulfillment_rate">Fulfillment Rate:</label><br>
+        <input type="number" id="fulfillment_rate" name="fulfillment_rate" step="0.01"><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
