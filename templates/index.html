@@ -3,9 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .main {
+            padding: 20px;
+        }
+        .pagetitle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .breadcrumb {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .breadcrumb-item {
+            display: inline;
+            margin-right: 5px;
+        }
+        .breadcrumb-item.active {
+            color: #007bff;
+        }
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .info-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-title {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .card-title a {
+            color: #333333;
+            text-decoration: none;
+        }
+        .card-title a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>hello</h1>
+    <main id="main" class="main">
+        <div class="pagetitle">
+          <h1>Dashboard</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </nav>
+        </div>
+      
+        <section class="section dashboard">
+          <div class="row">
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+              <div class="row">
+                <!-- Dashboard Item 1 -->
+                <div class="col-xxl-4 col-md-6">
+                  <a href="{% url 'vendor_details'%}">
+                    <div class="card info-card sales-card">
+                      <div class="card-body">
+                        <div class="d-flex align-items-center">
+                          <div class="card-icon rounded-circle">
+                            <i class="fas fa-building"></i>
+                          </div>
+                          <div class="ps-3">
+                            <h5 class="card-title"><a href="{% url 'vendor_details'%}">Vendor Details</a></h5>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                
+            </div>
+        </section>
+      </main>
 </body>
 </html>

@@ -4,43 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Vendor</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Add Vendor</h1>
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <form method="post" action="{% url 'save_vendor' %}">
-        {% csrf_token %}
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name"><br>
-        
-        <label for="contact_details">Contact Details:</label><br>
-        <textarea id="contact_details" name="contact_details"></textarea><br>
-        
-        <label for="address">Address:</label><br>
-        <textarea id="address" name="address"></textarea><br>
-        
-        <label for="vendor_code">Vendor Code:</label><br>
-        <input type="text" id="vendor_code" name="vendor_code"><br>
-        
-        <label for="on_time_delivery_rate">On-Time Delivery Rate:</label><br>
-        <input type="number" id="on_time_delivery_rate" name="on_time_delivery_rate" step="0.01"><br>
-        
-        <label for="quality_rating_avg">Quality Rating Average:</label><br>
-        <input type="number" id="quality_rating_avg" name="quality_rating_avg" step="0.01"><br>
-        
-        <label for="average_response_time">Average Response Time:</label><br>
-        <input type="number" id="average_response_time" name="average_response_time" step="0.01"><br>
-        
-        <label for="fulfillment_rate">Fulfillment Rate:</label><br>
-        <input type="number" id="fulfillment_rate" name="fulfillment_rate" step="0.01"><br>
-        
-        <input type="submit" value="Submit">
-    </form>
+    <div class="container">
+        <h1>Add Vendor</h1>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form method="post" action="{% url 'save_vendor' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            
+            <div class="form-group">
+                <label for="contact_details">Contact Details:</label>
+                <textarea class="form-control" id="contact_details" name="contact_details"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea class="form-control" id="address" name="address"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="vendor_code">Vendor Code:</label>
+                <input type="text" class="form-control" id="vendor_code" name="vendor_code">
+            </div>
+            
+            <div class="form-group">
+                <label for="on_time_delivery_rate">On-Time Delivery Rate:</label>
+                <input type="number" class="form-control" id="on_time_delivery_rate" name="on_time_delivery_rate" step="0.01">
+            </div>
+            
+            <div class="form-group">
+                <label for="quality_rating_avg">Quality Rating Average:</label>
+                <input type="number" class="form-control" id="quality_rating_avg" name="quality_rating_avg" step="0.01">
+            </div>
+            
+            <div class="form-group">
+                <label for="average_response_time">Average Response Time:</label>
+                <input type="number" class="form-control" id="average_response_time" name="average_response_time" step="0.01">
+            </div>
+            
+            <div class="form-group">
+                <label for="fulfillment_rate">Fulfillment Rate:</label>
+                <input type="number" class="form-control" id="fulfillment_rate" name="fulfillment_rate" step="0.01">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

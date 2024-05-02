@@ -8,7 +8,10 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from .forms import VendorForm
 
+def index(request):
+    return render(request, 'index.html')
 
+# vendor logic
 def save_vendor(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -52,11 +55,9 @@ def edit_vendor(request, vendor_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Vendor data updated successfully.')
-        
+            return redirect('edit_vendor', vendor_id=vendor_id) 
         else:
-            print(form.errors)
-        return redirect('edit_vendor')
-            
+            print(form.errors) 
     else:
         form = VendorForm(instance=vendor)
     
@@ -66,12 +67,18 @@ def edit_vendor(request, vendor_id):
         'form': form,
     }
     return render(request, 'vendor/edit_vendor.html', context)
-
     
 def vendor_details(request):
     data = Vendor.objects.all()
-    print(data)
     context ={
         'data':data,
     }
-    return render(request, 'vendor/api.html', context)
+    return render(request, 'vendor/view_vendor.html', context)
+
+def delete_vendor(request, vendor_id):
+    if request.method == 'POST':
+        vendor = Vendor.objects.get(pk=vendor_id)
+        vendor.delete()
+        return redirect('vendor_details')  
+    else:
+        pass
