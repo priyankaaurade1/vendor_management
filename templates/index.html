@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -87,30 +88,87 @@
         </div>
       
         <section class="section dashboard">
-          <div class="row">
-            <!-- Left side columns -->
-            <div class="col-lg-12">
-              <div class="row">
-                <!-- Dashboard Item 1 -->
-                <div class="col-xxl-4 col-md-6">
-                  <a href="{% url 'vendor_details'%}">
-                    <div class="card info-card sales-card">
-                      <div class="card-body">
-                        <div class="d-flex align-items-center">
-                          <div class="card-icon rounded-circle">
-                            <i class="fas fa-building"></i>
-                          </div>
-                          <div class="ps-3">
-                            <h5 class="card-title"><a href="{% url 'vendor_details'%}">Vendor Details</a></h5>
-                          </div>
+            <div class="container">
+                <div class="row">
+                    <!-- Left side columns -->
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <!-- Dashboard Item 1 -->
+                            <div class="col-xxl-4 col-md-6">
+                                <a href="{% url 'vendor_details'%}">
+                                    <div class="card info-card sales-card">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="card-icon rounded-circle">
+                                                    <i class="fas fa-building"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h5 class="card-title"><a href="{% url 'vendor_details'%}">Vendor Details</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Dashboard Item 2 -->
+                            <div class="col-xxl-4 col-md-6">
+                                <a href="{% url 'save_vendor'%}">
+                                    <div class="card info-card sales-card">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="card-icon rounded-circle">
+                                                    <i class="fas fa-building"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h5 class="card-title"><a href="{% url 'save_vendor'%}">Add Vendor</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Dashboard Item 3 -->
+                            <div class="col-xxl-4 col-md-6">
+                                <a href="{% url 'create_purchase_order'%}">
+                                    <div class="card info-card sales-card">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="card-icon rounded-circle">
+                                                    <i class="fas fa-building"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h5 class="card-title"><a href="{% url 'create_purchase_order'%}">Add Purchase Order</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Dashboard Item 4 -->
+
+                            <div class="col-xxl-4 col-md-6">
+                                <a href="{% url 'order_details'%}">
+                                    <div class="card info-card sales-card">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="card-icon rounded-circle">
+                                                    <i class="fas fa-building"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h5 class="card-title"><a href="{% url 'order_details'%}">View Purchase Order</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </a>
                 </div>
-                
             </div>
         </section>
-      </main>
+    </main>
+    <!-- Bootstrap JS (optional, for some features) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

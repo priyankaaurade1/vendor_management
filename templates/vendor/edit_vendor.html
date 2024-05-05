@@ -4,46 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vendor Edit Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @media (min-width: 992px) {
+            .form-field-lg {
+                max-width: 300px; 
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Edit Vendor</h1>
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <form id="updateVendorForm" method="POST" action="{% url 'edit_vendor' vendor_id=vendor_id %}" enctype="multipart/form-data">
-
-        {% csrf_token %}
-        <input type="hidden" name="_method" value="PUT">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" value="{{ vendor.name }}"><br>
-        
-        <label for="contact_details">Contact Details:</label><br>
-        <textarea id="contact_details" name="contact_details">{{ vendor.contact_details }}</textarea><br>
-        
-        <label for="address">Address:</label><br>
-        <textarea id="address" name="address">{{ vendor.address }}</textarea><br>
-        
-        <label for="vendor_code">Vendor Code:</label><br>
-        <input type="text" id="vendor_code" name="vendor_code" value="{{ vendor.vendor_code }}"><br>
-        
-        <label for="on_time_delivery_rate">On-Time Delivery Rate:</label><br>
-        <input type="number" id="on_time_delivery_rate" name="on_time_delivery_rate" step="0.01" value="{{ vendor.on_time_delivery_rate }}"><br>
-        
-        <label for="quality_rating_avg">Quality Rating Average:</label><br>
-        <input type="number" id="quality_rating_avg" name="quality_rating_avg" step="0.01" value="{{ vendor.quality_rating_avg }}"><br>
-        
-        <label for="average_response_time">Average Response Time:</label><br>
-        <input type="number" id="average_response_time" name="average_response_time" step="0.01" value="{{ vendor.average_response_time }}"><br>
-        
-        <label for="fulfillment_rate">Fulfillment Rate:</label><br>
-        <input type="number" id="fulfillment_rate" name="fulfillment_rate" step="0.01" value="{{ vendor.fulfillment_rate }}"><br>
-        
-        <button type="submit">Update Vendor</button>
-    </form>
-    
+    <center>
+    <div class="container">
+        <h1 class="mt-5">Edit Vendor</h1>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form id="updateVendorForm" method="POST" action="{% url 'edit_vendor' vendor_id=vendor_id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="_method" value="PUT">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control form-field-lg" id="name" name="name" value="{{ vendor.name }}">
+            </div>
+            <div class="mb-3">
+                <label for="contact_details" class="form-label">Contact Details:</label>
+                <textarea class="form-control form-field-lg" id="contact_details" name="contact_details">{{ vendor.contact_details }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address:</label>
+                <textarea class="form-control form-field-lg" id="address" name="address">{{ vendor.address }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="vendor_code" class="form-label">Vendor Code:</label>
+                <input type="text" class="form-control form-field-lg" id="vendor_code" name="vendor_code" value="{{ vendor.vendor_code }}">
+            </div>
+            <div class="mb-3">
+                <label for="on_time_delivery_rate" class="form-label">On-Time Delivery Rate:</label>
+                <input type="number" class="form-control form-field-lg" id="on_time_delivery_rate" name="on_time_delivery_rate" step="0.01" value="{{ vendor.on_time_delivery_rate }}">
+            </div>
+            <div class="mb-3">
+                <label for="quality_rating_avg" class="form-label">Quality Rating Average:</label>
+                <input type="number" class="form-control form-field-lg" id="quality_rating_avg" name="quality_rating_avg" step="0.01" value="{{ vendor.quality_rating_avg }}">
+            </div>
+            <div class="mb-3">
+                <label for="average_response_time" class="form-label">Average Response Time:</label>
+                <input type="number" class="form-control form-field-lg" id="average_response_time" name="average_response_time" step="0.01" value="{{ vendor.average_response_time }}">
+            </div>
+            <div class="mb-3">
+                <label for="fulfillment_rate" class="form-label">Fulfillment Rate:</label>
+                <input type="number" class="form-control form-field-lg" id="fulfillment_rate" name="fulfillment_rate" step="0.01" value="{{ vendor.fulfillment_rate }}">
+            </div>
+            <button type="submit" class="btn btn-primary" id="updateBtn">Update Vendor</button>
+        </form>
+    </div>
+    </center>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#updateBtn').click(function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                if (confirm("Are you sure you want to update this vendor?")) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

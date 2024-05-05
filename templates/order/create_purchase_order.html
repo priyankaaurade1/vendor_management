@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Purchase Order</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Create Purchase Order</h1>
+        <form method="POST" action="{% url 'create_purchase_order' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="po_number">PO Number:</label>
+                <input type="text" class="form-control" id="po_number" name="po_number" required>
+            </div>
+            <div class="form-group">
+                <label for="vendor">Vendor:</label>
+                <select class="form-control" id="vendor" name="vendor" required>
+                    {% for vendor in vendors %}
+                        <option value="{{ vendor.id }}">{{ vendor.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>            
+            <div class="form-group">
+                <label for="order_date">Order Date:</label>
+                <input type="datetime-local" class="form-control" id="order_date" name="order_date" required>
+            </div>
+            <div class="form-group">
+                <label for="delivery_date">Delivery Date:</label>
+                <input type="datetime-local" class="form-control" id="delivery_date" name="delivery_date" required>
+            </div>
+            <div class="form-group">
+                <label for="items">Items:</label>
+                <textarea class="form-control" id="items" name="items" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select class="form-control" id="status" name="status" required>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                    <option value="canceled">Canceled</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quality_rating">Quality Rating:</label>
+                <input type="number" step="0.01" class="form-control" id="quality_rating" name="quality_rating">
+            </div>
+            <div class="form-group">
+                <label for="issue_date">Issue Date:</label>
+                <input type="datetime-local" class="form-control" id="issue_date" name="issue_date" required>
+            </div>
+            <div class="form-group">
+                <label for="acknowledgment_date">Acknowledgment Date:</label>
+                <input type="datetime-local" class="form-control" id="acknowledgment_date" name="acknowledgment_date">
+            </div>
+                        
+            <button type="submit" class="btn btn-primary">Create Purchase Order</button>
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
