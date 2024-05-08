@@ -1,13 +1,18 @@
 from django.http import JsonResponse,HttpResponse
 from rest_framework.response import Response
 from django.shortcuts import render,redirect
-from .models import Vendor,PurchaseOrder
+from .models import Vendor,PurchaseOrder,HistoricalPerformance
 from django.contrib import messages
 from .serializers import VendorSerializer,PurchaseOrderSerializer
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from .forms import VendorForm,PurchaseOrderForm
 import json
+from rest_framework.views import APIView
+from django.core.serializers import serialize
+from django.db.models import Avg, F, ExpressionWrapper, fields
+from django.utils import timezone
+
 
 def index(request):
     return render(request, 'index.html')
@@ -175,3 +180,50 @@ def delete_order(request, po_id):
         return redirect('order_details')  
     else:
         pass
+
+def historical_details(request):
+    data = HistoricalPerformance.objects.all()
+    context ={
+        'data':data,
+    }
+    return render(request, 'performance/view_performance.html', context)
+
+class VendorPerformanceView(APIView):
+    def get(self, request, vendor_id):
+        vendor = Vendor.objects.get(pk=vendor_id)
+        
+        # On-Time Delivery Rate Calculation
+        completed_pos = PurchaseOrder.objects.filter(vendor=vendor, status='completed')
+        total_completed_pos = completed_pos.count()
+        on_time_delivered_pos = completed_pos.filter(delivery_date__lte=timezone.now()).count()
+        on_time_delivery_rate = on_time_delivered_pos / total_completed_pos if total_completed_pos > 0 else 0
+        
+        # Quality Rating Average Calculation
+        quality_rating_avg = PurchaseOrder.objects.filter(vendor=vendor, quality_rating__isnull=False).aggregate(avg_quality_rating=Avg('quality_rating'))['avg_quality_rating'] or 0
+        
+        # Average Response Time Calculation
+        avg_response_time_timedelta = PurchaseOrder.objects.filter(vendor=vendor, acknowledgment_date__isnull=False).aggregate(
+            avg_response_time=ExpressionWrapper(
+                Avg(F('acknowledgment_date') - F('issue_date')),
+                output_field=fields.DurationField()
+            )
+        )['avg_response_time']
+
+        # Convert avg_response_time_timedelta to seconds or set it to 0 if None
+        avg_response_time_seconds = avg_response_time_timedelta.total_seconds() if avg_response_time_timedelta else 0
+
+        # Fulfillment Rate Calculation
+        total_pos = PurchaseOrder.objects.filter(vendor=vendor).count()
+        fulfilled_pos = PurchaseOrder.objects.filter(vendor=vendor, status='completed').count()
+        fulfillment_rate = fulfilled_pos / total_pos if total_pos > 0 else 0
+        
+        # Return performance metrics along with other data
+        context = {
+            'vendor': vendor,
+            'on_time_delivery_rate': on_time_delivery_rate,
+            'quality_rating_avg': quality_rating_avg,
+            'average_response_time': avg_response_time_seconds,  # No need to call total_seconds() again
+            'fulfillment_rate': fulfillment_rate,
+        }
+        
+        return render(request, 'performance/performance.html', context)

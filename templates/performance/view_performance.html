@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Performance</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .vendor-details {
+            display: none;
+        }
+        .vendor-row:hover {
+            cursor: pointer;
+            background-color: #f0f0f0;
+        }
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Purchase Order Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Vendor Name</th>
+                <th>View</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for per in data %}
+                <tr class="vendor-row" data-vendor-id="{{ per.id }}">
+                    <td>{{ per.vendor }}</td>
+                    <td>
+                        <form method="get" action="/api/vendors/{{ per.id }}/performance">  
+                            {% csrf_token %}
+                            <button type="submit" class="edit-button">View</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="vendor-details">
+        
+    </div>
+
+    </body>
+</html>
