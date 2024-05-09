@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Vendor Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
     <style>
         table {
             width: 100%;
@@ -34,6 +37,14 @@
     </style>
 </head>
 <body>
+    <div class="pagetitle">
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active">Vendor Details</li>
+          </ol>
+        </nav>
+    </div>
     <h2>Vendor Details</h2>
     <table>
         <thead>

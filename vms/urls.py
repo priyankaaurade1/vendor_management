@@ -17,6 +17,8 @@ urlpatterns = [
     path('edit_orders/<int:po_id>/', views.update_purchase_order, name='update_purchase_order'),
     path('order/<int:po_id>/delete/', views.delete_order, name='delete_order'),
     path('order_details', views.order_details, name='order_details'),
+
+    # performance evaluation
     path('historical_details', views.historical_details, name='historical_details'),
     path('api/vendors/<int:vendor_id>/performance', views.VendorPerformanceView.as_view()),
 
