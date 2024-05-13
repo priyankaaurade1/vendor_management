@@ -12,12 +12,15 @@ if [ ! -d "$OUTPUT_DIR" ]; then
 fi
 
 # Install Python dependencies
-python3.10.5 -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 
 # Collect static files
-python3.10.5 manage.py collectstatic --no-input
+python3 manage.py collectstatic --no-input
 
 # Move static files to the output directory
-mv staticfiles/* "$OUTPUT_DIR/"
+if [ -d "staticfiles" ]; then
+    mv staticfiles/* "$OUTPUT_DIR/"
+fi
+
 
 echo "BUILD END"
